@@ -24,55 +24,61 @@ const movieDB = {
     ]
 };
 
-function removeAllADV() {
-    document.querySelector('.promo__adv').remove();
-}
-removeAllADV();
+const adv = document.querySelectorAll('.promo__adv'),
+    poster = document.querySelector('.promo__bg'),
+    genre = poster.querySelector('.promo__genre'),
+    filmList = document.querySelector('.promo__interactive-list'),
+    filmTitle = document.querySelector('.promo__interactive-title');
 
-function changeText() {
-    document.querySelector('.promo__genre').innerHTML = 'Драма';
-}
-changeText();
+// 1:
+adv.forEach(item => {
+    item.remove()
+})
 
-function changeBackground() {
-    const bg = document.querySelector('.promo__bg').style.backgroundImage = "url('../img/bg.jpg')";
-}
-changeBackground()
+// 2:
+genre.textContent = 'Драма';
 
-function changeOnList() {
-    const films = document.querySelectorAll('.promo__interactive-item');
-    movieDB.movies.sort();
-    for(let i = 0; i < films.length; i++) {
-        films[i].innerHTML = movieDB.movies[i];
-    }
+// 3:
+poster.style.backgroundImage = 'url("../img/bg.jpg")';
 
-    const unorderList = document.querySelector('ul', '.promo__interactive-list');
+// 4:
+movieDB.movies.sort;
 
-    const orderList = document.createElement('ol', 'class="promo__interactive-list"');
-    // unorderList.innerHTML
-    orderList.innerHTML = unorderList.innerHTML;
+//__version_1:
+// filmList.remove();
+// movieDB.movies.sort();
+// filmTitle.insertAdjacentHTML('afterend', '<ul class="promo__interactive-list"></ul>');
+// const filmOList = document.querySelector('.promo__interactive-list');
 
+// let list = ''
+// for(let i = 0; i < movieDB.movies.length; i++) {
+//      list += `<li class="promo__interactive-item"> ${movieDB.movies[i]}${'\n'}</li>`
+// }
+// filmOList.innerHTML = list
 
-    console.log(unorderList.parentNode.innerHTML);
-    console.log(orderList);
+//__version_2:
+// filmList.innerHTML = '';
+// movieDB.movies.sort();
 
-    unorderList.replaceWith(orderList);
-    
+// for(let i = 0; i < movieDB.movies.length; i++) {
+//     // filmItem.innerHTML = i + 'SER';
+//     const filmItem = document.createElement('li');
+//     filmItem.setAttribute('class', 'promo__interactive-item');
+//     filmList.appendChild(filmItem);
+//     filmItem.textContent = `${i + 1}. ${movieDB.movies[i]}`;
+// }
 
+//__version_3:
 
-    // const listkind = document.getElementsByClassName('promo__interactive-list');
-    // // console.log(listkind);
-    // const orderList = document.createElement('ol');
-    // // console.log(orderList);
-    // const order = listkind[0].parentElement.innerHTML.replaceAll('ul', 'ol');
-    // console.log(order)
-    // listkind[0].replaceWith(order)
-    // for(let i = 0; i < listkind.length; i++) {
-    //     console.log(listkind[i].innerHTML)//.replace("ul", 'ol')
-    // }
-    // console.log(listkind);
+filmList.innerHTML = '';
 
-}
+movieDB.movies.sort();
+movieDB.movies.forEach((item, index) => {
 
-changeOnList();
+    filmList.innerHTML += `
+        <li class="promo__interactive-item">${index + 1}. ${item}
+            <div class="delete"></div>
+        </li>
+    `
+})
 
