@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function createMovieList(films, parent){
         parent.innerHTML = '';
-
+        sortArray(films);
         films.forEach((item, index) => {
             parent.innerHTML += `
                 <li class="promo__interactive-item">${index + 1}. ${(item.length > 21) ? item.slice(0, 21).concat('...') : item}
@@ -89,7 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('.delete').forEach((element, index) => {
             element.addEventListener('click', (e) =>{
-                console.log(element.parentElement);
+                e.target.parentElement.remove();
+                films.splice(index, 1);
+                createMovieList(films, parent);
+                // const removeIndex = films.indexOf();
+                // console.log(index)
+                // films.splice() 
             })
         })
     }
@@ -97,8 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
     deleteADV(adv)
 
     makeChanges();
-
-    sortArray(movieDB.movies);
 
     createMovieList(movieDB.movies, filmList);
     
